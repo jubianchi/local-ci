@@ -1,0 +1,5 @@
+/.local-ci/
+/bin/
+/pkg/
+/src/*/
+!/src/local-ci/
