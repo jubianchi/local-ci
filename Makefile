@@ -14,7 +14,10 @@ BINPATH := $(GOPATH)/bin
 
 SRCS = $(PKGPATH)/main.go $(wildcard $(PKGPATH)/**/*.go)
 
+.PHONY: verify
 verify: fmt vet
+
+.PHONY: build build/alpine build/darwin build/linux build/windows
 build: build/alpine build/darwin build/linux build/windows
 build/alpine: $(BINPATH)/alpine/local-ci
 build/darwin: $(BINPATH)/darwin/local-ci
