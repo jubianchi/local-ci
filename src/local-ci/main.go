@@ -1,27 +1,15 @@
 package main
 
 import (
-	//"context"
-	"os"
-	"path/filepath"
-
-	//"github.com/docker/docker/api/types"
-	//"github.com/docker/docker/pkg/stdcopy"
+	"fmt"
+	"github.com/docker/docker/client"
 	"github.com/urfave/cli"
-
 	"local-ci/app"
 	"local-ci/configuration"
-	//"./container"
-	"fmt"
-	"local-ci/utils"
-	//"github.com/docker/docker/pkg/stdcopy"
-	//"context"
-	//"github.com/docker/docker/api/types/container"
-	//"github.com/docker/docker/api/types/network"
-	"github.com/docker/docker/client"
-	//"github.com/docker/docker/pkg/jsonmessage"
-	//"github.com/docker/docker/pkg/stdcopy"
 	"local-ci/result"
+	"local-ci/utils"
+	"os"
+	"path/filepath"
 )
 
 func main() {
