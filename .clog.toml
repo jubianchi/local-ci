@@ -7,4 +7,3 @@ outfile = "CHANGELOG.md"
 [sections]
 Features = ["feat"]
 "Bug Fixes" = ["fix"]
-Misc = ["chore", "refactor", "fmt"]
