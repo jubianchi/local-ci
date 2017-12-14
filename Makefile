@@ -48,3 +48,16 @@ vendor:
 $(BINPATH)/%/local-ci: $(SRCS) vendor
 	mkdir -p $(dir $@)
 	GOPATH=$(GOPATH) GOOS=$(shell echo $* | sed s/alpine/linux/) $(GO) build $(GO_BUILDFLAGS) -o $@ $<
+
+CHANGELOG.md: $(BINPATH)/clog .clog.toml
+	$< --setversion 1.0.0-beta.1
+
+$(BINPATH)/clog:
+	mkdir -p $(BINPATH)
+ifeq ($(shell uname),Darwin)
+	wget -q -O $@.tar.gz https://github.com/clog-tool/clog-cli/releases/download/v0.9.3/clog-v0.9.3-$(shell uname -m)-apple-darwin.tar.gz
+else
+	wget -q -O $@.tar.gz https://github.com/clog-tool/clog-cli/releases/download/v0.9.3/clog-v0.9.3-$(shell uname -m)-unknown-linux-gnu.tar.gz
+endif
+	tar xzvf $@.tar.gz -C bin/
+	rm -f $@.tar.gz

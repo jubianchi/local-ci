@@ -1,0 +1,10 @@
+[clog]
+repository = "https://github.com/jubianchi/local-ci"
+link-style = "github"
+changelog = "CHANGELOG.md"
+outfile = "CHANGELOG.md"
+
+[sections]
+Features = ["feat"]
+"Bug Fixes" = ["fix"]
+Misc = ["chore", "refactor", "fmt"]
