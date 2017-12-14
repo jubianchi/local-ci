@@ -6,7 +6,6 @@ import (
 	"github.com/urfave/cli"
 	"local-ci/app"
 	"local-ci/configuration"
-	"local-ci/result"
 	"local-ci/utils"
 	"os"
 	"path/filepath"
@@ -57,58 +56,7 @@ func main() {
 				utils.CheckError(err)
 
 				pipelineResult := pipeline.Run(docker, workingDirectory)
-
-				switch pipelineResult.Status {
-				case result.PASSED:
-					fmt.Print("\033[1;32mPipeline passed:\033[0;39m\n")
-					break
-				case result.ALLOWED_TO_FAIL:
-					fmt.Print("\033[1;33mPipeline passed with allowed failures:\033[0;39m\n")
-					break
-				case result.FAILED:
-					fmt.Print("\n\033[1;31mPipeline failed:\033[0;39m\n")
-					break
-				}
-
-				for _, stageResult := range pipelineResult.Stages {
-					switch stageResult.Status {
-					case result.PASSED:
-						fmt.Printf("  \033[32mStage \033[1m%s\033[0;32m passed:\033[0;39m\n    ", stageResult.Name)
-						break
-					case result.ALLOWED_TO_FAIL:
-						fmt.Printf("  \033[33mStage \033[1m%s\033[0;33m passed with allowed failures:\033[0;39m\n    ", stageResult.Name)
-						break
-					case result.FAILED:
-						fmt.Printf("  \033[31mStage \033[1m%s\033[0;31m failed:\033[0;39m\n    ", stageResult.Name)
-						break
-					case result.SKIPPED:
-						fmt.Printf("  \033[37mStage \033[1m%s\033[0;37m was skipped:\033[0;39m\n    ", stageResult.Name)
-						break
-					}
-
-					for index, jobResult := range stageResult.Jobs {
-						switch jobResult.Status {
-						case result.PASSED:
-							fmt.Printf("\033[1;32m%s (passed)\033[0;39m", jobResult.Name)
-							break
-						case result.ALLOWED_TO_FAIL:
-							fmt.Printf("\033[1;33m%s (passed with allowed failures)\033[0;39m", jobResult.Name)
-							break
-						case result.FAILED:
-							fmt.Printf("\033[1;31m%s (failed)\033[0;39m", jobResult.Name)
-							break
-						case result.SKIPPED:
-							fmt.Printf("\033[1;37m%s (skipped)\033[0;39m", jobResult.Name)
-							break
-						}
-
-						if index < len(stageResult.Jobs)-1 {
-							fmt.Print(", ")
-						} else {
-							fmt.Print("\n")
-						}
-					}
-				}
+				pipelineResult.Report()
 
 				return nil
 			},

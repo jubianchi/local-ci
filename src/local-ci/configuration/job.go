@@ -115,7 +115,7 @@ func (job Job) Run(client *client.Client, workingDirectory string) *result.Job {
 
 	stdcopy.StdCopy(os.Stdout, os.Stderr, attach.Reader)
 
-	bodyChan, errChan := client.ContainerWait(context.Background(), ct.ID, container.WaitConditionNextExit)
+	bodyChan, errChan := client.ContainerWait(context.Background(), ct.ID, "")
 
 	select {
 	case body := <-bodyChan:
