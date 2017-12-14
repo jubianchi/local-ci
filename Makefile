@@ -1,9 +1,9 @@
 GO := go
 
-GO_BUILDFLAGS := -v -ldflags "-s -w"
-GO_TESTFLAGS := -v -cover
-GO_GETFLAGS := -v
-GO_VETFLAGS := -v -all -source -shadow=true -shadowstrict
+GO_BUILDFLAGS ?= -v -ldflags "-s -w"
+GO_TESTFLAGS ?= -v -cover
+GO_GETFLAGS ?= -v
+GO_VETFLAGS ?= -v -all -source -shadow=true -shadowstrict
 
 GOFMT := gofmt
 GOFMTFLAGS := -s -w -l

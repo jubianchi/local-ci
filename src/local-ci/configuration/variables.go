@@ -38,7 +38,9 @@ func CreateVariablesFromYaml(yml map[interface{}]interface{}) *Variables {
 	variables := make(map[string]string)
 
 	for name, value := range yml {
-		variables[name.(string)] = value.(string)
+		value, _ := value.(string)
+
+		variables[name.(string)] = value
 	}
 
 	return CreateVariables(variables)
