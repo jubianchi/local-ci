@@ -67,12 +67,11 @@ func (job Job) Run(client *client.Client, workingDirectory string) *result.Job {
 
 	entrypointPath := workingDirectory + "/.local-ci/entrypoint"
 	writer, _ := os.Create(entrypointPath)
-	os.Chmod(entrypointPath, 0755)
 
 	job.writeScript(writer)
 
 	containerConfiguration := container.Config{
-		Cmd:        []string{"/runner"},
+		Cmd:        []string{"/bin/sh", "/runner"},
 		WorkingDir: "/build",
 	}
 	job.configureContainer(&containerConfiguration)

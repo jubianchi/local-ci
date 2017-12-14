@@ -1,0 +1,13 @@
+language: go
+
+go:
+    - 1.9
+
+sudo: required
+
+services:
+    - docker
+
+script:
+    - make build/linux
+    - bin/linux/local-ci run --file .gitlab-ci.yml
