@@ -2,7 +2,7 @@ package app
 
 import "github.com/urfave/cli"
 
-const Version = "1.0.0"
+const Version = "1.0.0-beta.1"
 const Name = "local-ci"
 
 func CreateApp() *cli.App {

@@ -50,7 +50,7 @@ $(BINPATH)/%/local-ci: $(SRCS) vendor
 	GOPATH=$(GOPATH) GOOS=$(shell echo $* | sed s/alpine/linux/) $(GO) build $(GO_BUILDFLAGS) -o $@ $<
 
 CHANGELOG.md: $(BINPATH)/clog .clog.toml
-	$< --setversion 1.0.0-beta.1
+	$<
 
 $(BINPATH)/clog:
 	mkdir -p $(BINPATH)
